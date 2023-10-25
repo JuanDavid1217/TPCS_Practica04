@@ -79,7 +79,7 @@ public class Venta implements Serializable{
         this.detalles = detalles;
         this.total=new BigDecimal(0);
         for(DetVenta detalle:detalles){
-            this.total.add(detalle.getPrecio().multiply(BigDecimal.valueOf(detalle.getCantidad())));
+            this.total=this.total.add(detalle.getPrecio().multiply(BigDecimal.valueOf(detalle.getCantidad())));
         }
     }
 

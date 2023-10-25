@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Cliente implements Serializable{
     @Column
     private String rfc;
     
-    @OneToMany(mappedBy="cliente")
+    @OneToMany(mappedBy="cliente", fetch=FetchType.LAZY)
     private List<Venta> ventas;
 
     public long getClienteId() {
@@ -59,6 +60,14 @@ public class Cliente implements Serializable{
 
     public void setRfc(String rfc) {
         this.rfc = rfc;
+    }
+
+    public List<Venta> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<Venta> ventas) {
+        this.ventas = ventas;
     }
     
     

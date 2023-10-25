@@ -5,6 +5,7 @@
 package org.uv.tpcs_practica04;
 
 import java.math.BigDecimal;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,12 +26,24 @@ public class TPCS_Practica04 {
         session.save(cliente1);
         transaction.commit();*/
         
-        Producto producto1=new Producto();
+        /*Producto producto1=new Producto();
         producto1.setDescripcion("producto1");
         producto1.setExistencia(10);
         producto1.setCosto(BigDecimal.valueOf(10));
         producto1.setPrecio(BigDecimal.valueOf(15));
-        session.save(producto1);
+        session.save(producto1);*/
+        
+        Cliente cliente=session.get(Cliente.class, 1L);
+        if(cliente!=null){
+            if(cliente.getVentas().size()>0){
+                List<Venta> ventas=cliente.getVentas();
+                for(Venta v:ventas ){
+                  System.out.println("Venta: "+v.getVentaId()+"Total: "+v.getTotal());   
+                }
+            }else{
+                System.out.println("El usuario no ha realizado ventas");
+            }
+        }
         transaction.commit();
         
         session.close();
